@@ -65,11 +65,12 @@ namespace PROG1442_Exercise4.Controllers
             {
                 if (!ArtTypeExists(id))
                 {
-                    return NotFound();
+
+                    return BadRequest("Concurrency Error: Type has been Removed.");
                 }
                 else
                 {
-                    throw;
+                    return BadRequest("Concurrency Error: Doctor has been updated by another user.  Cancel and try editing the record again.");
                 }
             }
 
@@ -118,9 +119,20 @@ namespace PROG1442_Exercise4.Controllers
 
                 return Ok(artType);
             }
-            catch(DbUpdateException)
+            catch (DbUpdateException dex)
             {
-                return BadRequest("Unable to save changes to the database. Try again, and if the problem persists see your system administrator.");
+                if (dex.InnerException.InnerException.Message.Contains("FX_"))
+                {
+                    return BadRequest("Unable to Delete: You cannot delete a Type with associated artwork.");
+                }
+                else
+                {
+                    return BadRequest("Unable to save changes to the database. Try again, and if the problem persists see your system administrator.");
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest("Something went wrong. Try again, and if the problem persists see your system administrator.");
             }
         }
 

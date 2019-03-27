@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PROG1442_Exercise4.Models;
 
 namespace PROG1442_Exercise4.Data.ArtMigrations
 {
     [DbContext(typeof(ArtContext))]
-    partial class ArtContextModelSnapshot : ModelSnapshot
+    [Migration("20190327203716_compUnique")]
+    partial class compUnique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

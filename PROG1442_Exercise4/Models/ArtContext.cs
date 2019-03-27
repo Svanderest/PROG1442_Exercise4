@@ -25,6 +25,10 @@ namespace PROG1442_Exercise4.Models
                 .WithOne(w => w.ArtType)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Artwork>()
+                .HasIndex(a => new { a.Name, a.ArtTypeID })
+                .IsUnique();
+
         }
     }
 }

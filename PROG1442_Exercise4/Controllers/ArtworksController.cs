@@ -77,19 +77,27 @@ namespace PROG1442_Exercise4.Controllers
             {
                 if (!ArtworkExists(id))
                 {
-                    ModelState.AddModelError("", "Concurrency Error: Patient has been Removed.");
+                    ModelState.AddModelError("", "Concurrency Error: Artwork has been Removed.");
                     return BadRequest(ModelState);
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Concurrency Error: Patient has been updated by another user.  Cancel and try editing the record again.");
+                    ModelState.AddModelError("", "Concurrency Error: Artowrk has been updated by another user.  Cancel and try editing the record again.");
                     return BadRequest(ModelState);
                 }
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException dex)
             {
-                ModelState.AddModelError("", "Unable to save changes to the database. Try again, and if the problem persists see your system administrator.");
-                return BadRequest(ModelState);
+                if (dex.InnerException.Message.Contains("IX_"))
+                {
+                    ModelState.AddModelError("", "Unable to save changes: Duplicate Name for works of this type.");
+                    return BadRequest(ModelState);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Unable to save changes to the database. Try again, and if the problem persists see your system administrator.");
+                    return BadRequest(ModelState);
+                }
             }
         }
 
@@ -108,10 +116,18 @@ namespace PROG1442_Exercise4.Controllers
                 await _context.SaveChangesAsync();
                 return CreatedAtAction("GetArtworks", new { id = artwork.ID }, artwork);
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException dex)
             {
-                ModelState.AddModelError("", "Unable to save changes to the database. Try again, and if the problem persists see your system administrator.");
-                return BadRequest(ModelState);
+                if (dex.InnerException.Message.Contains("IX_"))
+                {
+                    ModelState.AddModelError("", "Unable to save: Duplicate Name for works of this type.");
+                    return BadRequest(ModelState);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Unable to save changes to the database. Try again, and if the problem persists see your system administrator.");
+                    return BadRequest(ModelState);
+                }
             }
         }
 
@@ -127,13 +143,22 @@ namespace PROG1442_Exercise4.Controllers
             var artwork = await _context.Artworks.FindAsync(id);
             if (artwork == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Delete Error: Artwork has already been Removed.");
             }
-
-            _context.Artworks.Remove(artwork);
-            await _context.SaveChangesAsync();
-
-            return Ok(artwork);
+            else
+            {
+                try
+                {
+                    _context.Artworks.Remove(artwork);
+                    await _context.SaveChangesAsync();
+                    return Ok(artwork);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Delete Error: Unable to delete Artwork.");
+                }
+            }
+            return BadRequest(ModelState);
         }
 
         private bool ArtworkExists(int id)
