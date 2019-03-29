@@ -142,7 +142,7 @@ namespace Lab3_Client
         {
             // Navigate to the detail page
 
-            //Frame.Navigate(typeof(PatientDetailPage), (Artwork)e.ClickedItem);
+            Frame.Navigate(typeof(ArtworkDetailsPage), (Artwork)e.ClickedItem);
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
@@ -160,7 +160,7 @@ namespace Lab3_Client
 
             // Navigate to the detail page
 
-            //Frame.Navigate(typeof(PatientDetailPage), newWork);
+            Frame.Navigate(typeof(ArtworkDetailsPage), newWork);
         }
     }
 }
