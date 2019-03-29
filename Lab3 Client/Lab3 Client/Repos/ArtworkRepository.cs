@@ -37,7 +37,7 @@ namespace Lab3_Client.Repos
 
         public async Task<List<Artwork>> GetArtworkByType(int TypeID)
         {
-            var response = await client.GetAsync($"/api/artwork/byType/{TypeID}");
+            var response = await client.GetAsync($"/api/artworks/ByType/{TypeID}");
             if (response.IsSuccessStatusCode)
             {
                 List<Artwork> artworks = await response.Content.ReadAsAsync<List<Artwork>>();

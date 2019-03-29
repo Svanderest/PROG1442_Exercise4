@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab3_Client.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,9 @@ namespace Lab3_Client
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+        /// 
+        public List<ArtType> ArtTypes;
+
         public App()
         {
             this.InitializeComponent();
