@@ -4,32 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Lab3_Client"
     xmlns:data="using:Lab3_Client.Models"
+    xmlns:Converters="using:Lab3_Client.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <!--<Page.Resources>
+    <Page.Resources>
         <Converters:DateTimeToOffsetConverter x:Key="DateTimeToOffsetConverter"/>
         <Converters:ByteToStringConverter x:Key="ByteToStringConverter"/>
-    </Page.Resources>-->
+    </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <!--<Grid.Background>
+        <Grid.Background>
             <ImageBrush Stretch="UniformToFill" ImageSource="Assets/med2.jpg" Opacity="0.2"/>
         </Grid.Background>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-                <VisualState x:Name="WideState">
-                    <VisualState.Setters>
-                        <Setter Target="finishedPicker.(Grid.Column)" Value="1"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -37,14 +26,14 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="0,12,0,6">
-            <TextBlock Text="Medical Office" FontSize="24" Margin="12,0,0,0"/>
-            <TextBlock x:Name="txtPageTitle" Text="Patient" FontSize="20" Margin="13,3,0,3" />
+            <TextBlock Text="Artwork Client" FontSize="24" Margin="12,0,0,0"/>
+            <TextBlock x:Name="txtPageTitle" Text="Artwork" FontSize="20" Margin="13,3,0,3" />
             <Rectangle Fill="#FFF4F4F5" Height="1" Stroke="Black" HorizontalAlignment="Stretch" Margin="0,2,0,2"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10,0,10,0">
-            <Grid Name="patientDisplayGrid">
+            <Grid Name="artDisplayGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>

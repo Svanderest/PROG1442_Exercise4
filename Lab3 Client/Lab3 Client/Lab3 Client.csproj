@@ -98,6 +98,8 @@
     <Compile Include="ArtworkDetailsPage.xaml.cs">
       <DependentUpon>ArtworkDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ByteToStringConverter.cs" />
+    <Compile Include="Converters\DateTimeToOffsetConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

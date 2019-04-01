@@ -156,11 +156,17 @@ namespace Lab3_Client
             //initial value to StartDate when I switched from using
             //Binding to x:Bind in the Details page!  Shows one way 
             //that the new x:Bind is limited in some ways.
-            Artwork newWork = new Artwork();            
+            Artwork newWork = new Artwork();
 
             // Navigate to the detail page
-
-            Frame.Navigate(typeof(ArtworkDetailsPage), newWork);
+            try
+            {
+                Frame.Navigate(typeof(ArtworkDetailsPage), newWork);
+            }
+            catch(Exception ex)
+            {
+                ex.ToString();
+            }
         }
     }
 }

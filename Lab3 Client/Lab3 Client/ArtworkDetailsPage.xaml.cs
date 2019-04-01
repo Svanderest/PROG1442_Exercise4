@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -32,7 +33,7 @@ namespace Lab3_Client
         {
             this.InitializeComponent();
             //This line prevents the page from rotating to landscape
-            //DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
             fillDropDown();
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -75,7 +76,7 @@ namespace Lab3_Client
             catch (ApiException apiEx)
             {
                 var sb = new StringBuilder();
-                //sb.AppendLine(string.Format(" HTTP Status Code: {0}", apiEx.StatusCode.ToString()));
+                sb.AppendLine(string.Format(" HTTP Status Code: {0}", apiEx.StatusCode.ToString()));
                 sb.AppendLine("Errors:");
                 foreach (var error in apiEx.Errors)
                 {
@@ -107,7 +108,7 @@ namespace Lab3_Client
             }
             catch (Exception)
             {
-                Common.ShowMessage("Error", "No Doctors Available.  Go back and refresh the Patient page.");
+                Common.ShowMessage("Error", "No Types Available.  Go back and refresh the Patient page.");
             }
 
         }
