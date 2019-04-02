@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <Converters:DateTimeToOffsetConverter x:Key="DateTimeToOffsetConverter"/>
-        <Converters:ByteToStringConverter x:Key="ByteToStringConverter"/>
+        <Converters:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
@@ -65,13 +65,13 @@
 
                 <ComboBox x:Name="TypeCombo" Grid.Column="1" Grid.Row="2" 
                           HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                          SelectedValuePath="ID"  DisplayMemberPath="FormalName" 
+                          SelectedValuePath="ID"  DisplayMemberPath="Type" 
                           SelectedValue="{x:Bind view.ArtTypeID, Mode=TwoWay}"   />
 
                 <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,6,0"
                            VerticalAlignment="Center" Name="expYrVisitsBlock" Text="Value  " />
                 <TextBox Grid.Row="3" Grid.Column="1" Height="24"  Name="ValueTextBox"  
-                         Text="{x:Bind  view.Value, Converter={StaticResource ByteToStringConverter}, Mode=TwoWay}" AcceptsReturn="False" InputScope="Number" />
+                         Text="{x:Bind  view.Value, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay}" AcceptsReturn="False" InputScope="Number" />
                 
                 <CalendarDatePicker x:Name="finishedPicker" Header="Finished" Grid.Column="1" Grid.Row="4"  Date="{x:Bind view.Finished, Converter={StaticResource DateTimeToOffsetConverter}, Mode=TwoWay}"
                                     HorizontalAlignment="Left" VerticalAlignment="Top"  />

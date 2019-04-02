@@ -7,14 +7,14 @@ using Windows.UI.Xaml.Data;
 
 namespace Lab3_Client.Converters
 {
-    public class ByteToStringConverter : IValueConverter
+    class DecimalToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             try
             {
-                if (value == null) return string.Empty;
-
+                if (value == null)
+                    return string.Empty;
                 return String.Format("{0:n0}", value);
             }
             catch (Exception)
@@ -28,11 +28,12 @@ namespace Lab3_Client.Converters
             try
             {
                 string val = value.ToString();
-                //strip out any characters that are neither a decimal point or a digit
-                string cleanVal = new string(val.Where(c => (char.IsDigit(c))).ToArray());
-                return System.Convert.ToByte(cleanVal);
+                if (!decimal.TryParse(val, out decimal result))
+                    return 0;
+                else
+                    return result;
             }
-            catch (Exception)
+            catch
             {
                 return 0;
             }
